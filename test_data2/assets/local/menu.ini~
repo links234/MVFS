@@ -1,0 +1,13 @@
+;		comment 
+
+ key	  :		  value    x;some comment after assignment
+
+#comment one
+
+[Section1]
+ some_path	  =    "path/to/file"
+	var1    =     	\n\t\tabc\n\=\:\;\#
+ var2="teasdfasd" + 123
+
+[Section2]
+	nr_of_enemies=	 40    
