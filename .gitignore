@@ -1,3 +1,9 @@
+# codeblocks
+MVFS.depend
+
+# binaries
 /bin
 /obj
-MVFS.depend
+
+# local data
+/local

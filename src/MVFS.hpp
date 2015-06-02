@@ -1,13 +1,6 @@
 #ifndef MVFS_HPP
 #define MVFS_HPP
 
-class MVFS
-{
-public:
-
-
-private:
-
-};
+#include "MVFS_V1.hpp"
 
 #endif
