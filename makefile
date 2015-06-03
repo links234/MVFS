@@ -52,5 +52,8 @@ clean:
 	rm -f $(OBJS) $(OUT)
 
 build:
-	make clean
 	make mvfs
+
+all:
+	make clean
+	make build
