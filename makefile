@@ -1,5 +1,5 @@
 #Location and name of your application
-OUT = mvfs
+OUT = bin/mvfs
 
 #Compiler (i.e. g++ for C++, or gcc for C)
 CXX = g++
@@ -52,7 +52,7 @@ clean:
 	rm -f $(OBJS) $(OUT)
 
 build:
-	make mvfs
+	make bin/mvfs
 
 all:
 	make clean
