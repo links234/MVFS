@@ -1,9 +1,6 @@
 #ifndef MVFS_V1_HPP
 #define MVFS_V1_HPP
 
-#include <sys/types.h>
-#include <dirent.h>
-#include <errno.h>
 #include <vector>
 #include <string>
 #include <fstream>

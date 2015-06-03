@@ -1,5 +1,14 @@
 #include "MVFS_V1.hpp"
 
+#include "MVFS_V1_Constants.hpp"
+#include "MVFS_V1_Reader.hpp"
+
+#if defined(LINUX_PLATFORM)
+    #include <sys/types.h>
+    #include <dirent.h>
+    #include <errno.h>
+#endif
+
 using namespace std;
 
 namespace MVFS
@@ -8,13 +17,6 @@ namespace MVFS
     {
         vector<char> xorKey;
         ofstream archiveOutput;
-
-        const unsigned char MKDIR=1;
-        const unsigned char OPENDIR=2;
-        const unsigned char BACK=3;
-        const unsigned char NEWFILE=4;
-        const unsigned char OPENLASTMKDIR=5;
-        const unsigned char THIS_VERSION=1;
 
         void PackWriteFile(string pathToFile)
         {
@@ -50,6 +52,7 @@ namespace MVFS
 
         void PackRec(string pathToDir)
         {
+#if defined(LINUX_PLATFORM)
             DIR *dp;
             struct dirent *dirp;
             if((dp  = opendir(pathToDir.c_str())) == NULL)
@@ -89,6 +92,7 @@ namespace MVFS
                 }
             }
             closedir(dp);
+#endif
         }
 
         void Pack (string pathToDir, string pathToArchive, vector<char> key)
