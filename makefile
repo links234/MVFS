@@ -50,10 +50,17 @@ $(OUT): $(OBJS)
 
 clean:
 	rm -f $(OBJS) $(OUT)
+	echo "Clean done!"
 
 build:
 	make bin/mvfs
+	@echo "Build done!"
 
 all:
 	make clean
 	make build
+
+install:
+	make all
+	cp $(OUT) /usr/bin/mvfs
+	@echo "Install done!"
