@@ -6,6 +6,13 @@ namespace MVFS
 {
     namespace V1
     {
-        
+        Reader::Reader(FileReaderInterface *pFileReaderItf)
+            : MVFS::Reader(pFileReaderItf)
+        {
+        }
+
+        Reader::~Reader()
+        {
+        }
     }
 }

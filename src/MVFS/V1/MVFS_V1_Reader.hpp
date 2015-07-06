@@ -12,7 +12,10 @@ namespace MVFS
         public:
 
         protected:
+            Reader(FileReaderInterface *pFileReaderItf);
+            virtual ~Reader();
 
+            friend class MVFS::Reader;
         };
     }
 }
