@@ -4,6 +4,8 @@
 
 #include "MVFS_V1_Reader.hpp"
 
+#include <cstdio>
+
 namespace MVFS
 {
     Reader::Reader(FileReaderInterface *pReaderItf)
@@ -19,6 +21,8 @@ namespace MVFS
     {
         unsigned char version = ReadVersion(pReaderItf);
 
+        printf("Reader::Open version = %d\n", version);
+
         if(version == 1)
         {
             pReaderItf->Reset();
@@ -31,7 +35,7 @@ namespace MVFS
     unsigned char Reader::ReadVersion(FileReaderInterface *pReaderItf)
     {
         unsigned char version = 0;
-        pReaderItf->ReadFrom(0,reinterpret_cast<char*>(&version),1);
+        pReaderItf->ReadFrom(0,(char*)(&version),1);
         return (version>>4);
     }
 

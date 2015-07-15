@@ -7,28 +7,28 @@
 
 namespace MVFS
 {
-    class FileReaderCstdio
+    class FileReaderCstdio : public FileReaderInterface
     {
     public:
+        virtual ~FileReaderCstdio();
+
         virtual int Size();
         virtual void Reset();
-        
+
         virtual void Read(char *pBuffer, int size);
         virtual void ReadFrom(int offset, char *pBuffer, int size);
 
         static FileReaderCstdio* Open(const char *pPath);
 
     protected:
+        FileReaderCstdio(const char *pPath);
+
         void Init(const char *pPath);
         void Uninit();
 
         FILE *m_file;
         int m_offset;
         int m_size;
-
-    private:
-        FileReaderCstdio(const char *pPath);
-        virtual ~FileReaderCstdio();
     };
 }
 

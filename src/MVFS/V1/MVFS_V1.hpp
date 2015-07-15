@@ -11,7 +11,6 @@ namespace MVFS
     namespace V1
     {
         void Pack (std::string pathToDir, std::string pathToArchive="", std::vector<char> key=std::vector<char>());
-        void Unpack(std::string pathToArchive, std::string pathToDir="", std::vector<char> key=std::vector<char>());
     }
 }
 

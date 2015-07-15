@@ -49,7 +49,7 @@ namespace MVFS
             memset(pBuffer+maxpossible+1,0,size-maxpossible);
             return;
         }
-        if(fread(pBuffer,1,m_size,m_file)!=m_size)
+        if(fread(pBuffer,1,size,m_file)!=size)
         {
             //ERROR
         }

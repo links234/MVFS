@@ -117,15 +117,5 @@ namespace MVFS
 
             archiveOutput.close();
         }
-
-        ifstream archiveInput;
-
-        void Unpack(string pathToArchive, string pathToDir, vector<char> key)
-        {
-            if(pathToArchive=="")
-            {
-                //TODO
-            }
-        }
     }
 }

@@ -8,13 +8,14 @@ namespace MVFS
     class Reader
     {
     public:
+        virtual ~Reader();
+
         static Reader* Open(FileReaderInterface *pReaderItf);
 
         unsigned char GetVersion();
 
     protected:
         Reader(FileReaderInterface *pReaderItf);
-        virtual ~Reader();
 
         static unsigned char ReadVersion(FileReaderInterface *pReaderItf);
 
