@@ -3,7 +3,7 @@ OUT = bin/mvfs
 
 #Compiler (i.e. g++ for C++, or gcc for C)
 CXX = g++
-CC  = g++
+CC  = gcc
 
 #Directory for includes (headers, etc.)
 IDIR = src
@@ -48,6 +48,8 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 $(OUT): $(OBJS)
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(LIBS)
 
+.PHONY: clean build all install run
+
 clean:
 	rm -f $(OBJS) $(OUT)
 	echo "Clean done!"
@@ -64,3 +66,7 @@ install:
 	make all
 	cp $(OUT) /usr/bin/mvfs
 	@echo "Install done!"
+
+run:
+	make build
+	bin/mvfs
