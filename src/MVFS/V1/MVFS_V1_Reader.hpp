@@ -2,6 +2,7 @@
 #define MVFS_V1_READER_HPP
 
 #include <vector>
+#include <string>
 
 #include "MVFSReader.hpp"
 
@@ -16,6 +17,8 @@ namespace MVFS
 
         protected:
             Reader(FileReaderInterface *pFileReaderItf, std::vector<char> key);
+
+            std::string ReadString(FileReaderInterface *pFileReaderItf);
 
             friend class MVFS::Reader;
         };

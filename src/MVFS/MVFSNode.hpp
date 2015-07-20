@@ -31,19 +31,24 @@ namespace MVFS
         bool IsDirectory() const;
         bool IsFile() const;
 
+        Node* GetParent() const;
+        int GetFileSize() const;
+        int GetFileOffset() const;
+
         static Node* GetSentinel();
 
     private:
-        Node(Reader *reader);
+        Node(Reader *reader, Type type);
 
         void SetParent(Node *parent);
 
         std::unordered_map<std::string,Node*> m_directories, m_files;
         Type m_type;
         int m_fileOffset;
+        int m_fileSize;
 
-        Reader *m_reader;
-        Node *m_parent;
+        Reader *m_pReader;
+        Node *m_pParent;
 
         static Node s_sentinel;
 

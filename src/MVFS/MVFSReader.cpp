@@ -44,4 +44,9 @@ namespace MVFS
     {
         return m_version;
     }
+
+    Node* Reader::GetRoot()
+    {
+        return m_pRoot;
+    }
 }

@@ -4,10 +4,10 @@ using namespace std;
 
 namespace MVFS
 {
-    Node Node::s_sentinel(NULL);
+    Node Node::s_sentinel(NULL, Node::Type::DIR);
 
-    Node::Node(Reader *reader)
-        : m_type(Node::Type::DIR), m_fileOffset(0), m_reader(reader)
+    Node::Node(Reader *reader, Node::Type type)
+        : m_type(type), m_fileOffset(0), m_fileSize(0), m_pReader(reader), m_pParent(&s_sentinel)
     {
     }
 
@@ -63,6 +63,21 @@ namespace MVFS
         return m_type == Node::Type::FILE;
     }
 
+    Node* Node::GetParent() const
+    {
+        return m_pParent;
+    }
+
+    int Node::GetFileSize() const
+    {
+        return m_fileSize;
+    }
+
+    int Node::GetFileOffset() const
+    {
+        return m_fileOffset;
+    }
+
     Node* Node::GetSentinel()
     {
         return &s_sentinel;
@@ -70,6 +85,6 @@ namespace MVFS
 
     void Node::SetParent(Node *parent)
     {
-        m_parent=parent;
+        m_pParent=parent;
     }
 }

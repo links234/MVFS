@@ -46,7 +46,7 @@ namespace MVFS
                 }
             }
 
-            archiveOutput<<fileSize;
+            archiveOutput.write((char*)(&fileSize),sizeof(fileSize));
             archiveOutput.write(buffer,fileSize);
         }
 
