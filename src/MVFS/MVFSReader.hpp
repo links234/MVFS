@@ -1,7 +1,10 @@
 #ifndef MVFSREADER_HPP
 #define MVFSREADER_HPP
 
+#include <vector>
+
 #include "FileReaderInterface.hpp"
+#include "MVFSNode.hpp"
 
 namespace MVFS
 {
@@ -10,18 +13,21 @@ namespace MVFS
     public:
         virtual ~Reader();
 
-        static Reader* Open(FileReaderInterface *pReaderItf);
+        static Reader* Open(FileReaderInterface *pFileReaderItf, std::vector<char> key);
 
         unsigned char GetVersion();
 
+        Node* GetRoot();
+
     protected:
-        Reader(FileReaderInterface *pReaderItf);
+        Reader(FileReaderInterface *pReaderItf, std::vector<char> key);
 
-        static unsigned char ReadVersion(FileReaderInterface *pReaderItf);
+        static unsigned char ReadVersion(FileReaderInterface *pFileReaderItf);
 
-        FileReaderInterface *m_pReaderItf;
-
+        FileReaderInterface *m_pFileReaderItf;
+        Node *m_pRoot;
         unsigned char m_version;
+        std::vector<char> m_key;
     };
 }
 

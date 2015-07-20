@@ -55,6 +55,16 @@ namespace MVFS
         }
     }
 
+    void FileReaderCstdio::Skip(int size)
+    {
+        m_offset+=size;
+    }
+
+    int FileReaderCstdio::GetOffset()
+    {
+        return m_offset;
+    }
+
     FileReaderCstdio* FileReaderCstdio::Open(const char *pPath)
     {
         return new FileReaderCstdio(pPath);

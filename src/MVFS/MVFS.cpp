@@ -12,7 +12,7 @@ namespace MVFS
         }
 
         FileReaderInterface *pFileReaderItf = FileReaderCstdio::Open(pathToArchive.c_str());
-        MVFS::Reader *pReader = MVFS::Reader::Open(pFileReaderItf);
+        MVFS::Reader *pReader = MVFS::Reader::Open(pFileReaderItf,key);
 
         delete pFileReaderItf;
         delete pReader;

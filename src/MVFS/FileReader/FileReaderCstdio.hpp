@@ -18,6 +18,9 @@ namespace MVFS
         virtual void Read(char *pBuffer, int size);
         virtual void ReadFrom(int offset, char *pBuffer, int size);
 
+        virtual void Skip(int size);
+        virtual int GetOffset();
+
         static FileReaderCstdio* Open(const char *pPath);
 
     protected:

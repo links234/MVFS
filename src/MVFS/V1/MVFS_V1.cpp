@@ -80,6 +80,7 @@ namespace MVFS
                 if(dirp->d_type==DT_REG)
                 {
                     archiveOutput<<NEWFILE;
+                    archiveOutput.write((const char*)name.c_str(),name.size()+1);
                     PackWriteFile(pathToDir+"/"+name);
                 }
                 else if(dirp->d_type==DT_DIR)

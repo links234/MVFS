@@ -1,6 +1,8 @@
 #ifndef MVFS_V1_READER_HPP
 #define MVFS_V1_READER_HPP
 
+#include <vector>
+
 #include "MVFSReader.hpp"
 
 namespace MVFS
@@ -13,7 +15,7 @@ namespace MVFS
             virtual ~Reader();
 
         protected:
-            Reader(FileReaderInterface *pFileReaderItf);
+            Reader(FileReaderInterface *pFileReaderItf, std::vector<char> key);
 
             friend class MVFS::Reader;
         };
