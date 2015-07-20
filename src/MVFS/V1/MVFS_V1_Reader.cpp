@@ -40,7 +40,7 @@ namespace MVFS
                         cursor = cursor->Get(name);
                         if(cursor==MVFS::Node::GetSentinel())
                         {
-                            cout<<"ERROR: Directory does not exists!";
+                            cout<<"ERROR: Directory does not exists!"<<endl;
                         }
                     break;
                     case BACK:
@@ -83,7 +83,6 @@ namespace MVFS
                 ans+=ch;
                 pFileReaderItf->Read(&ch,1);
             }
-            cout<<endl;
             return ans;
         }
 

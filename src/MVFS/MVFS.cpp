@@ -1,9 +1,7 @@
 #include "MVFS.hpp"
 
 #ifdef LINUX_PLATFORM
-    #include <sys/types.h>
-    #include <sys/stat.h>
-    #include <unistd.h>
+    #include <stdlib.h>
 #endif
 
 using namespace std;
@@ -13,12 +11,9 @@ namespace MVFS
 
     void MakeDir(string pathToDir)
     {
+        cout<<"DIR: "<<pathToDir<<endl;
 #ifdef LINUX_PLATFORM
-        struct stat st = {0};
-
-        if (stat("/some/directory", &st) == -1) {
-            mkdir("/some/directory", 0700);
-        }
+        system( (string("mkdir -p ")+pathToDir).c_str() );
 #endif
     }
 
@@ -27,13 +22,13 @@ namespace MVFS
         cout<<"File: "<<pathToFile<<"  size = "<<node->GetFileSize()<<"   offset = "<<node->GetFileOffset()<<endl;
     }
 
-    void UnpackRec(Node *node, string pathToDir)
+    void UnpackDir(Node *node, string pathToDir)
     {
+        MakeDir(pathToDir);
         for(unordered_map<string,Node*>::iterator it=node->GetDirectories().begin();it!=node->GetDirectories().end();++it)
         {
-            MakeDir(pathToDir);
             string dirName=pathToDir+"/"+it->first;
-            UnpackRec(it->second,dirName);
+            UnpackDir(it->second,dirName);
         }
         for(unordered_map<string,Node*>::iterator it=node->GetFiles().begin();it!=node->GetFiles().end();++it)
         {
@@ -52,7 +47,7 @@ namespace MVFS
         FileReaderInterface *pFileReaderItf = FileReaderCstdio::Open(pathToArchive.c_str());
         MVFS::Reader *pReader = MVFS::Reader::Open(pFileReaderItf,key);
 
-        UnpackRec(pReader->GetRoot(),pathToDir);
+        UnpackDir(pReader->GetRoot(),pathToDir);
 
         delete pFileReaderItf;
         delete pReader;

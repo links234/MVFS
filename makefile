@@ -69,4 +69,4 @@ install:
 
 run:
 	make build
-	bin/mvfs
+	sudo bin/mvfs
