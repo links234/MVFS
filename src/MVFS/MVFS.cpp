@@ -1,5 +1,7 @@
 #include "MVFS.hpp"
 
+#include <fstream>
+
 #ifdef LINUX_PLATFORM
     #include <stdlib.h>
 #endif
@@ -8,10 +10,8 @@ using namespace std;
 
 namespace MVFS
 {
-
     void MakeDir(string pathToDir)
     {
-        cout<<"DIR: "<<pathToDir<<endl;
 #ifdef LINUX_PLATFORM
         system( (string("mkdir -p ")+pathToDir).c_str() );
 #endif
@@ -19,7 +19,22 @@ namespace MVFS
 
     void UnpackFile(Node *node, string pathToFile)
     {
-        cout<<"File: "<<pathToFile<<"  size = "<<node->GetFileSize()<<"   offset = "<<node->GetFileOffset()<<endl;
+        cout<<"File: "<<pathToFile<<"  size = "<<node->GetFileSize()<<endl;
+
+        FileReaderInterface *file=node->Open();
+        int size=file->Size();
+
+        cout<<"size = "<<size<<"\n";
+        char *buffer=new char[size];
+        file->Read(buffer,size);
+        delete file;
+
+        ofstream fileOutput;
+        fileOutput.open(pathToFile.c_str(),ios::binary);
+        fileOutput.write(buffer,size);
+        fileOutput.close();
+
+        delete[] buffer;
     }
 
     void UnpackDir(Node *node, string pathToDir)

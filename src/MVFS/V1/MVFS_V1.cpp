@@ -48,6 +48,8 @@ namespace MVFS
 
             archiveOutput.write((char*)(&fileSize),sizeof(fileSize));
             archiveOutput.write(buffer,fileSize);
+
+            delete[] buffer;
         }
 
         void PackRec(string pathToDir)

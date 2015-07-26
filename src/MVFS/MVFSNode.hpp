@@ -7,10 +7,12 @@
 namespace MVFS
 {
     class Reader;
+    class FileReaderInterface;
 
     namespace V1
     {
         class Reader;
+        class FileReaderMVFS;
     }
 }
 
@@ -35,6 +37,8 @@ namespace MVFS
         int GetFileSize() const;
         int GetFileOffset() const;
 
+        FileReaderInterface* Open();
+
         static Node* GetSentinel();
 
     private:
@@ -54,6 +58,7 @@ namespace MVFS
 
         friend class MVFS::Reader;
         friend class MVFS::V1::Reader;
+        friend class MVFS::V1::FileReaderMVFS;
     };
 }
 

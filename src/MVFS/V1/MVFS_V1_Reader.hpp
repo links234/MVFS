@@ -15,6 +15,8 @@ namespace MVFS
         public:
             virtual ~Reader();
 
+            FileReaderInterface* Open(Node *pNode);
+
         protected:
             Reader(FileReaderInterface *pFileReaderItf, std::vector<char> key);
 

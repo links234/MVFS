@@ -2,9 +2,12 @@
 
 #include <cstddef>
 
+#include "FileReaderInterface.hpp"
 #include "MVFS_V1_Reader.hpp"
+#include "MVFSNode.hpp"
 
-#include <cstdio>
+#include <iostream>
+using namespace std;
 
 namespace MVFS
 {
@@ -21,8 +24,6 @@ namespace MVFS
     Reader* Reader::Open(FileReaderInterface *pFileReaderItf, std::vector<char> key)
     {
         unsigned char version = ReadVersion(pFileReaderItf);
-
-        printf("Reader::Open version = %d\n", version);
 
         if(version == 1)
         {
@@ -42,7 +43,7 @@ namespace MVFS
 
     unsigned char Reader::GetVersion()
     {
-        return m_version;
+        return (m_version>>4);
     }
 
     Node* Reader::GetRoot()

@@ -3,6 +3,9 @@
 #include <iostream>
 
 #include "MVFS_V1_Constants.hpp"
+#include "FileReaderInterface.hpp"
+#include "FileReaderMVFS_V1.hpp"
+#include "MVFSNode.hpp"
 
 using namespace std;
 
@@ -55,6 +58,10 @@ namespace MVFS
                         fileNode->m_fileSize=fileSize;
                         fileNode->m_fileOffset=m_pFileReaderItf->GetOffset();
                         m_pFileReaderItf->Skip(fileSize);
+
+                        cout<<"name = "<<name<<endl;
+                        cout<<"m_fileSize = "<<fileNode->m_fileSize<<endl;
+                        cout<<"m_fileOffset = "<<fileNode->m_fileOffset<<endl;
                     break;
                     case OPENLASTMKDIR:
                         if(!lastMkDir)
@@ -84,6 +91,11 @@ namespace MVFS
                 pFileReaderItf->Read(&ch,1);
             }
             return ans;
+        }
+
+        FileReaderInterface* Reader::Open(Node *pNode)
+        {
+            return (FileReaderInterface*)(MVFS::V1::FileReaderMVFS::Open(pNode));
         }
 
         Reader::~Reader()

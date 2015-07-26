@@ -3,8 +3,17 @@
 
 #include <vector>
 
-#include "FileReaderInterface.hpp"
-#include "MVFSNode.hpp"
+namespace MVFS
+{
+    class FileReaderInterface;
+
+    class Node;
+
+    namespace V1
+    {
+        class FileReaderMVFS;
+    }
+}
 
 namespace MVFS
 {
@@ -16,6 +25,7 @@ namespace MVFS
         static Reader* Open(FileReaderInterface *pFileReaderItf, std::vector<char> key);
 
         unsigned char GetVersion();
+        virtual FileReaderInterface* Open(Node *pNode) = 0;
 
         Node* GetRoot();
 
@@ -28,6 +38,8 @@ namespace MVFS
         Node *m_pRoot;
         unsigned char m_version;
         std::vector<char> m_key;
+
+        friend class MVFS::V1::FileReaderMVFS;
     };
 }
 

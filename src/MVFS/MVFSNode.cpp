@@ -1,5 +1,9 @@
 #include "MVFSNode.hpp"
 
+#include "MVFSReader.hpp"
+
+#include <iostream>
+
 using namespace std;
 
 namespace MVFS
@@ -9,6 +13,8 @@ namespace MVFS
     Node::Node(Reader *reader, Node::Type type)
         : m_type(type), m_fileOffset(0), m_fileSize(0), m_pReader(reader), m_pParent(&s_sentinel)
     {
+        m_directories.clear();
+        m_files.clear();
     }
 
     Node::~Node()
@@ -76,6 +82,11 @@ namespace MVFS
     int Node::GetFileOffset() const
     {
         return m_fileOffset;
+    }
+
+    FileReaderInterface* Node::Open()
+    {
+        return m_pReader->Open(this);
     }
 
     Node* Node::GetSentinel()
