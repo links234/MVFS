@@ -16,12 +16,21 @@ const int OPTYPE_UNPACK=1;
 
 int opType=OPTYPE_PACK;
 
-string from, to;
+string from, to, rawKey;
 int versionHint=MVFS::LATEST_VERSION;
 vector<char> key;
 
 int main(int argc, char* argv[])
 {
+    if(argc==2)
+    {
+        if(string(argv[1])=="--help")
+        {
+    //        PrintHelp();
+            return 0;
+        }
+    }
+
     for(int i=1;i<argc;++i)
     {
         string arg=string(argv[i]);
@@ -66,10 +75,61 @@ int main(int argc, char* argv[])
                 return -1;
             }
         }
+        else if(arg=="--key" || arg=="-k")
+        {
+            ++i;
+            if(i<argc)
+            {
+                rawKey = string(argv[i]);
+            }
+            else
+            {
+                cerr<<"Argument "<<argv[i-1]<<" not followd by a parameter"<<endl;
+                return -1;
+            }
+        }
         else
         {
             cerr<<"Invalid argument: \""<<arg<<"\""<<endl;
             return -1;
+        }
+    }
+
+    if(rawKey!="")
+    {
+        int index=0;
+        if(rawKey[index]=='{')
+        {
+            ++index;
+        }
+        else
+        {
+            cerr<<"Invalid key param \""<<rawKey<<"\""<<endl;
+            return -1;
+        }
+        while(true)
+        {
+            char value=0;
+            while('0'<=rawKey[index] && rawKey[index]<='9')
+            {
+                value*=10;
+                value+=rawKey[index]-'0';
+                ++index;
+            }
+            key.push_back(value);
+            if(rawKey[index]==',')
+            {
+                ++index;
+            }
+            else if(rawKey[index]=='}')
+            {
+                break;
+            }
+            else
+            {
+                cerr<<"Invalid key param \""<<rawKey<<"\""<<endl;
+                return -1;
+            }
         }
     }
 
