@@ -3,6 +3,8 @@
 #include "MVFS_V1_Constants.hpp"
 #include "MVFS_V1_Reader.hpp"
 
+#include "MVFSGlobal.hpp"
+
 #if defined(LINUX_PLATFORM)
     #include <sys/types.h>
     #include <dirent.h>
@@ -24,7 +26,10 @@ namespace MVFS
             int fileSize = file.tellg();
             file.close();
 
-            cout<<pathToFile<<"   size = "<<fileSize<<" bytes"<<endl;
+            if(Global::verbose)
+            {
+                cout<<"Packing file \""<<pathToFile<<"\" with size = "<<fileSize<<" bytes"<<endl;
+            }
 
             char *buffer=new char[fileSize];
             file.open(pathToFile.c_str(),ios::binary);
@@ -104,6 +109,12 @@ namespace MVFS
             {
                 pathToArchive=pathToDir+".mvfs";
             }
+
+            if(Global::verbose)
+            {
+                cout<<"Packing \""<<pathToDir<<"\" into \""<<pathToArchive<<"\""<<endl;
+            }
+
             archiveOutput.open(pathToArchive.c_str(),ios::binary);
 
             xorKey=key;

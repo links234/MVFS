@@ -6,6 +6,8 @@
     #include <stdlib.h>
 #endif
 
+#include "MVFSGlobal.hpp"
+
 using namespace std;
 
 namespace MVFS
@@ -19,12 +21,14 @@ namespace MVFS
 
     void UnpackFile(Node *node, string pathToFile)
     {
-        cout<<"File: "<<pathToFile<<"  size = "<<node->GetFileSize()<<endl;
+        if(Global::verbose)
+        {
+            cout<<"Unpacking file: \""<<pathToFile<<"\" with size = "<<node->GetFileSize()<<" bytes"<<endl;
+        }
 
         FileReaderInterface *file=node->Open();
         int size=file->Size();
 
-        cout<<"size = "<<size<<"\n";
         char *buffer=new char[size];
         file->Read(buffer,size);
         delete file;
@@ -56,7 +60,24 @@ namespace MVFS
     {
         if(pathToDir=="")
         {
-            //TODO
+            int index=pathToArchive.size()-1;
+            for(;pathToArchive[index]!='.' && index>0;--index);
+            if(index==0)
+            {
+                pathToDir=pathToArchive+"_unpacked";
+            }
+            else
+            {
+                for(int i=0;i<index;++i)
+                {
+                    pathToDir+=pathToArchive[i];
+                }
+            }
+        }
+
+        if(Global::verbose)
+        {
+            cout<<"Unpacking from \""<<pathToArchive<<"\" to \""<<pathToDir<<"\""<<endl;
         }
 
         FileReaderInterface *pFileReaderItf = FileReaderCstdio::Open(pathToArchive.c_str());
