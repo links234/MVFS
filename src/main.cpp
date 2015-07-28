@@ -20,13 +20,26 @@ string from, to, rawKey;
 int versionHint=MVFS::LATEST_VERSION;
 vector<char> key;
 
+inline void PrintHelp()
+{
+    cout<<"List of arguments: "<<endl;
+    cout<<"\t--verbose or -v print more information about what is happening"<<endl;
+    cout<<"\t--version=X or -vX sets the preferred file version to X"<<endl;
+    cout<<"\t--unpack or -u"<<endl;
+    cout<<"\t--pack or -p (this is set by default)"<<endl;
+    cout<<"\t--from <path> sets the path to the input file/directory"<<endl;
+    cout<<"\t--to <path> sets the path to the output file/directory"<<endl;
+    cout<<"\t--key \"{values-separated-by-comma}\" sets the key for encryption/decryption"<<endl;
+    cout<<"\t--help show this table";
+}
+
 int main(int argc, char* argv[])
 {
     if(argc==2)
     {
         if(string(argv[1])=="--help")
         {
-    //        PrintHelp();
+            PrintHelp();
             return 0;
         }
     }
