@@ -43,7 +43,7 @@ namespace MVFS
                         cursor = cursor->Get(name);
                         if(cursor==MVFS::Node::GetSentinel())
                         {
-                            cout<<"ERROR: Directory does not exists!"<<endl;
+                            cerr<<"ERROR: Directory does not exists!"<<endl;
                         }
                     break;
                     case BACK:
@@ -58,15 +58,11 @@ namespace MVFS
                         fileNode->m_fileSize=fileSize;
                         fileNode->m_fileOffset=m_pFileReaderItf->GetOffset();
                         m_pFileReaderItf->Skip(fileSize);
-
-                        cout<<"name = "<<name<<endl;
-                        cout<<"m_fileSize = "<<fileNode->m_fileSize<<endl;
-                        cout<<"m_fileOffset = "<<fileNode->m_fileOffset<<endl;
                     break;
                     case OPENLASTMKDIR:
                         if(!lastMkDir)
                         {
-                            cout<<"ERROR: OPENLASTMKDIR with no previous directory"<<endl;
+                            cerr<<"ERROR: OPENLASTMKDIR with no previous directory"<<endl;
                         }
                         else
                         {
@@ -74,7 +70,7 @@ namespace MVFS
                         }
                     break;
                     default:
-                        cout<<"ERROR: Invalid operation!"<<endl;
+                        cerr<<"ERROR: Invalid operation!"<<endl;
                     break;
                 }
             }

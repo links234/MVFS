@@ -64,7 +64,7 @@ namespace MVFS
             struct dirent *dirp;
             if((dp  = opendir(pathToDir.c_str())) == NULL)
             {
-                cout << "Error(" << errno << ") opening " << pathToDir << endl;
+                cerr << "Error(" << errno << ") opening directory \"" << pathToDir << "\"" << endl;
                 return;
             }
 

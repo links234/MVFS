@@ -4,6 +4,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <dirent.h>
+#include <errno.h>
 
 #include "MVFS.hpp"
 
@@ -73,14 +75,12 @@ int main(int argc, char* argv[])
 
     if(opType == OPTYPE_PACK)
     {
-        struct stat st;
-        if(stat(from.c_str(),&st) == 0)
+        DIR *dp;
+        struct dirent *dirp;
+        if((dp  = opendir(from.c_str())) == NULL)
         {
-            if( ((st.st_mode) & S_IFMT) != S_IFDIR)
-            {
-                cerr<<"Directory \""<<from<<"\" does not exists!"<<endl;
-                return -1;
-            }
+            cerr << "Error(" << errno << ") opening directory \"" << from << "\"" << endl;
+            return -1;
         }
 
         if(versionHint==1)
