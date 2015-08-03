@@ -1,5 +1,5 @@
-#ifndef MVFS_HPP
-#define MVFS_HPP
+#ifndef MVFS_MVFS_HPP
+#define MVFS_MVFS_HPP
 
 #include "MVFSNode.hpp"
 #include "MVFSReader.hpp"

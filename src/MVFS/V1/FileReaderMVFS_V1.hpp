@@ -1,5 +1,5 @@
-#ifndef FILEREADERMVFS_V1_HPP
-#define FILEREADERMVFS_V1_HPP
+#ifndef MVFS_FILEREADERMVFS_V1_HPP
+#define MVFS_FILEREADERMVFS_V1_HPP
 
 #include "FileReaderInterface.hpp"
 #include "FileReaderCstdio.hpp"
