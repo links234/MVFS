@@ -20,6 +20,7 @@ namespace MVFS
 
         virtual void Skip(int size);
         virtual int GetOffset();
+        virtual void SetOffset(int offset);
 
         static FileReaderCstdio* Open(const char *pPath);
 

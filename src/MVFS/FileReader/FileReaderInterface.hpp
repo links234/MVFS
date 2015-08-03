@@ -16,6 +16,7 @@ namespace MVFS
 
         virtual void Skip(int size) = 0;
         virtual int GetOffset() = 0;
+        virtual void SetOffset(int offset) = 0;
 
     protected:
         FileReaderInterface();
