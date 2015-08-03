@@ -33,6 +33,7 @@ namespace MVFS
         bool IsDirectory() const;
         bool IsFile() const;
 
+        Reader* GetReader() const;
         Node* GetParent() const;
         int GetFileSize() const;
         int GetFileOffset() const;

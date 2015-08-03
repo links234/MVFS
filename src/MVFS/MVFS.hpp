@@ -13,11 +13,18 @@
 #include "FileReaderInterface.hpp"
 #include "FileReaderCstdio.hpp"
 
+#include "FileReaderMVFS_V1.hpp"
+
 namespace MVFS
 {
     const int LATEST_VERSION = 1;
 
     void Unpack(std::string pathToArchive, std::string pathToDir="", std::vector<char> key=std::vector<char>());
+
+    FileReaderInterface* Open(Node *pNode);
+    Node* GetNode(Reader *pReader, const char *pPath);
+
+    FileReaderInterface* Open(Reader *pReader, const char *pPath);
 }
 
 #endif
