@@ -34,8 +34,8 @@ OBJ_FOLDERS = $(patsubst $(SRC_DIR)%, $(OBJ_DIR)%, $(shell /usr/bin/find $(SRC_D
 OBJS = $(patsubst %,$(OBJ_DIR)%,$(CC_OBJS))
 OBJS += $(patsubst %,$(OBJ_DIR)%,$(CXX_OBJS))
 
-CFLAGS := -O2 -g -DLINUX_PLATFORM
-CXXFLAGS := -O2 -g -std=gnu++11 -DLINUX_PLATFORM
+CFLAGS := -O2 -DLINUX_PLATFORM
+CXXFLAGS := -O2 -std=gnu++11 -DLINUX_PLATFORM
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	mkdir -p $(OBJ_FOLDERS)
@@ -55,6 +55,7 @@ clean:
 	echo "Clean done!"
 
 build:
+	mkdir -p bin
 	make bin/mvfs
 	@echo "Build done!"
 
@@ -64,7 +65,7 @@ all:
 
 install:
 	make all
-	cp $(OUT) /usr/bin/mvfs
+	sudo cp $(OUT) /usr/bin/mvfs
 	@echo "Install done!"
 
 run:
