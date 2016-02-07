@@ -5,7 +5,7 @@
 
 #include "MVFSGlobal.hpp"
 
-#if defined(LINUX_PLATFORM)
+#if defined(LINUX_PLATFORM) || defined(OSX_PLATFORM)
     #include <sys/types.h>
     #include <dirent.h>
     #include <errno.h>
@@ -59,7 +59,7 @@ namespace MVFS
 
         void PackRec(string pathToDir)
         {
-#if defined(LINUX_PLATFORM)
+#if defined(LINUX_PLATFORM) || defined(OSX_PLATFORM)
             DIR *dp;
             struct dirent *dirp;
             if((dp  = opendir(pathToDir.c_str())) == NULL)
