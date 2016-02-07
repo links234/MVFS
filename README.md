@@ -5,7 +5,7 @@ Light virtual file system designed for [MPACK][1] but also easy to integrate wit
 Features:
 
 1. Tool that can be used for complex build chains
-2. Simple transparent data protection
+2. Simple, transparent data protection
 3. Extensible format
 
 For more details and command list run:
@@ -13,12 +13,12 @@ For more details and command list run:
 $ mvfs --help
 ```
 
-## How to install
+## How to install (Linux or OSX)
 
 ```bash
 $ git clone <repo>
 $ cd mvfs
-$ make install
+$ python install.py
 ```
 
 ## License
